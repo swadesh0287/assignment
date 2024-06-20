@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Selection</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0; /* Optional: Light background to enhance shadow effect */
+    }
+    .container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+    }
+    .page-option, .select-all {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+    }
+    input[type="checkbox"]:checked {
+        background-color: blue;
+    }
+    .done-btn {
+        margin-top: 10px;
+        background-color: rgb(255, 206, 34);
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 3px; 
+    }
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 10px 0;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="select-all">
+        <label for="selectAll">All Pages</label>
+        <input type="checkbox" id="selectAll">
+    </div>
+    <hr>
+    <div class="page-option">
+        <label for="page1">Page 1</label>
+        <input type="checkbox" id="page1" class="page-checkbox">
+    </div>
+    <div class="page-option">
+        <label for="page2">Page 2</label>
+        <input type="checkbox" id="page2" class="page-checkbox">
+    </div>
+    <div class="page-option">
+        <label for="page3">Page 3</label>
+        <input type="checkbox" id="page3" class="page-checkbox">
+    </div>
+    <div class="page-option">
+        <label for="page4">Page 4</label>
+        <input type="checkbox" id="page4" class="page-checkbox">
+    </div>
+    <hr>
+    <button class="done-btn">Done</button>
+</div>
+<script>
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const pageCheckboxes = document.querySelectorAll('.page-checkbox');
+
+    selectAllCheckbox.addEventListener('change', function() {
+        pageCheckboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+
+    pageCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (!this.checked) {
+                selectAllCheckbox.checked = false;
+            } else if (document.querySelectorAll('.page-checkbox:checked').length === pageCheckboxes.length) {
+                selectAllCheckbox.checked = true;
+            }
+        });
+    });
+</script>
+</body>
+</html>
